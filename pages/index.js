@@ -4,7 +4,7 @@ import Navbar from '../components/navbar';
 import PostContainer from '../components/post';
 import Category from '../components/category';
 
-export default function Home() {
+export default function Home({posts, categories}) {
   return (
     <>
       <Head>
@@ -26,9 +26,20 @@ export default function Home() {
 
               {/* posts */}
               <div className="">
-                <PostContainer src= "https://www.nchealthinfo.org/wp-content/uploads/2019/08/GoodHealthInformation-768x477.jpg" title="Good Health Container" category="Health" author="John Doe" date="January 2, 2023" content="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum, cum inventore! Vero in porro doloremque libero eum officia cumque id."/>
-                <PostContainer src= "https://www.nchealthinfo.org/wp-content/uploads/2019/08/GoodHealthInformation-768x477.jpg" title="AI Robot" category="Technology" author="Harry Potter" date="January 2, 2023" content="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum, cum inventore! Vero in porro doloremque libero eum officia cumque id."/>
-
+                {
+                  posts.map(post => (
+                    <PostContainer
+                      key={post.id}
+                      id={post.id}
+                      src= "https://www.nchealthinfo.org/wp-content/uploads/2019/08/GoodHealthInformation-768x477.jpg" 
+                      title={post.title} 
+                      category={post.category.name} 
+                      author={post.author.name} 
+                      date={post.published_on} 
+                      content={post.content}
+                    />
+                  ))
+                }
               </div>
             </div>
 
@@ -37,8 +48,11 @@ export default function Home() {
 
               <div className="border-t border-slate-200">
                 {/* topics/ categories */}
-                <Category name='Science' /> 
-                <Category name='Health' /> 
+                {
+                  categories.map(category => (
+                    <Category key={category.id} category={category} />
+                  ))
+                }
               </div>
             </div>
           </div>
@@ -46,4 +60,16 @@ export default function Home() {
       </div>
     </>
   )
+}
+
+export async function getStaticProps(){
+  const posts_res = await fetch('http://127.0.0.1:8000/apis/articles/')
+  const posts = await posts_res.json()
+
+  const categories_res = await fetch('http://127.0.0.1:8000/apis/categories/')
+  const categories = await categories_res.json()
+
+  return {
+    props: {posts, categories, },
+  }  
 }

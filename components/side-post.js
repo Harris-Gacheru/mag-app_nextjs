@@ -9,7 +9,7 @@ export default function SidePostContainer(props){
 
             <div className="w-2/3 ps-5 flex flex-col">
                 <h3 className="mb-2 font-bold text-lg hover:text-blue-500">
-                    <Link href='/posts/1'>{props.title}</Link>
+                    <Link href={`/posts/${props.id}`}>{props.title}</Link>
                 </h3>
 
                 <h3 className="mb-2 text-white text-xs w-fit rounded-lg px-3 bg-red-500 drop-shadow">{props.category}</h3>

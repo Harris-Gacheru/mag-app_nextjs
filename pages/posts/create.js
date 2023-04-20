@@ -19,13 +19,15 @@ export default function CreatePost(){
                             <h4 className="font-bold text-xl text-center mb-3">Add Post</h4>
 
                             <form>
-                                <div className="mb-3 flex flex-col">
-                                    <label htmlFor="title" className="font-semibold mb-1">Title</label>
-                                    <input type="text" className="py-1 px-2 border outline-0 focus:border-blue-700 rounded" />
-                                </div>
-                                <div className="mb-3 flex flex-col">
-                                    <label htmlFor="publish_date" className="font-semibold mb-1">Published Date</label>
-                                    <input type="date" className="py-1 px-2 border outline-0 focus:border-blue-700 rounded" />
+                                <div className="flex gap-2">
+                                    <div className="w-1/2 mb-3 flex flex-col">
+                                        <label htmlFor="title" className="font-semibold mb-1">Title</label>
+                                        <input type="text" className="py-1 px-2 border outline-0 focus:border-blue-700 rounded" />
+                                    </div>
+                                    <div className="w-1/2 mb-3 flex flex-col">
+                                        <label htmlFor="publish_date" className="font-semibold mb-1">Published Date</label>
+                                        <input type="date" className="py-1 px-2 border outline-0 focus:border-blue-700 rounded" />
+                                    </div>
                                 </div>
 
                                 <div className="flex gap-2">
@@ -44,6 +46,12 @@ export default function CreatePost(){
                                         </select>
                                     </div>
                                 </div>
+
+                                <div className="mb-3 flex flex-col">
+                                    <label htmlFor="image" className="font-semibold mb-1">Image</label>
+                                    <input type="text" className="py-1 px-2 border outline-0 focus:border-blue-700 rounded" />
+                                </div>
+
                                 <div className="mb-3 flex flex-col">
                                     <label htmlFor="content" className="font-semibold mb-1">Content</label>
                                     <textarea name="content" id="content" cols="5" rows="5" className="py-1 px-2 border outline-0 focus:border-blue-700 rounded"></textarea>
