@@ -19,7 +19,7 @@ export default function PostContainer({id, src, title, category, author, date, c
                     <p>{date}</p>
                 </div>
                 {/* content: Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum, cum inventore! Vero in porro doloremque libero eum officia cumque id. */}
-                <div className="content font-light">{content}</div>
+                <div className="content font-light break-words max-h-12 overflow-hidden text-ellipsis">{content}</div>
             </div>
         </div>
     )
