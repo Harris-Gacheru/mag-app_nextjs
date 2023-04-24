@@ -1,4 +1,5 @@
 import Head from "next/head"
+import {useRouter} from "next/router"
 import { useState } from "react"
 import Navbar from "../../components/navbar"
 
@@ -11,6 +12,7 @@ export default function CreateCategory(){
     
     const [formSuccess, setFormSuccess] = useState(false)
     const [formSuccessMessage, setFormSuccessMessage] = useState("")
+    const router = useRouter()
 
     const handleInput = (e) => {
         const field = e.target.name
@@ -26,10 +28,11 @@ export default function CreateCategory(){
         e.preventDefault()
 
         const formURL = e.target.action
+        
         const data = new FormData()
 
         Object.entries(formData).forEach(([key, value]) => {
-        data.append(key, value);
+            data.append(key, value);
         })
 
         fetch(formURL, {
@@ -48,7 +51,11 @@ export default function CreateCategory(){
           })
     
           setFormSuccess(true)
-          setFormSuccessMessage(data.submission_text)
+          setFormSuccessMessage(data.message)
+
+          setTimeout(() => {
+            router.push('/')
+          }, 2000);
         })
     }
 
@@ -67,14 +74,14 @@ export default function CreateCategory(){
                         <div className="w-1/3 bg-white drop-shadow-sm p-3">
                             {
                                 formSuccess ?
-                                    <div>{formSuccessMessage}</div>
+                                    <div className="text-green-700">{formSuccessMessage}!!</div>
                                     :
 
                                     <>
 
                                         <h4 className="font-bold text-xl text-center mb-3">Add Category</h4>
 
-                                        <form method="POST" action="http://127.0.0.1:8000/apis/category/add" onSubmit={submitForm}>
+                                        <form method="POST" action="http://127.0.0.1:8000/apis/category/add/" onSubmit={submitForm}>
                                             <div className="mb-3 flex flex-col">
                                                 <label htmlFor="name" className="font-semibold mb-1">Name</label>
                                                 <input type="text" className="py-1 px-2 border outline-0 focus:border-blue-700 rounded" name="name" onChange={handleInput} value={formData.name}/>
